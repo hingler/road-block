@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "build",
+    "module": "CommonJS",
+    "target": "ES2015",
+  },
+  "exclude": ["client", "build"]
+}

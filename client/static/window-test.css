@@ -1,0 +1,61 @@
+.window {
+  width: 600px;
+  height: 450px;
+
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  position: absolute;
+  left: 64px;
+  top: 64px;
+}
+
+.window .header {
+  height: 32px;
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid red;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.header-name {
+  padding: 0px 16px;
+}
+
+.bars-left, .bars-right {
+  flex-grow: 1;
+  padding: 0px 16px;
+  background-color: purple;
+}
+
+.window-close, .window-max {
+  padding: 4px;
+  aspect-ratio: 1;
+  background-color: green;
+}
+
+.content {
+  border: 2px solid red;
+  height: 100%;
+  box-sizing: border-box;
+  border-top: 0px;
+}
+
+.subwindow {
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+}
+
+body {
+  background-color: #463a4f;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
