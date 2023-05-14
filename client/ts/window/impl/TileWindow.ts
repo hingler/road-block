@@ -18,6 +18,8 @@ export class TileWindow implements IWindow {
     this.windowView = view;
     this.createWindowElements();
     this.dragTracker = new MouseDragTracker(this.header, this);
+
+    this.subwindowElem.appendChild(view.getRootElement());
   }
 
   getWindowPosition(): [number, number] {

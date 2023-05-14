@@ -5,6 +5,8 @@ export class DebugWindow implements IWindowView {
 
   constructor() {
     this.root = document.createElement("div");
+    this.root.style.color = "white";
+    this.root.textContent = "this is a placeholder message :3 there's a lot that i could write about it and i'm not sure what would be good. what do you think i should do? any tips? advice? give me your suggestions";
   }
 
   getViewName(): string {
