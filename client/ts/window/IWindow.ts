@@ -11,5 +11,17 @@ export interface IWindow {
    * Sets position of this window
    * @param pos - new position, offset from left
    */
-  setWindowPosition(pos: [number, number]);
+  setWindowPosition(pos: [number, number]): void;
+
+
+  /**
+   * @returns size of this window
+   */
+  getWindowSize(): [number, number];
+
+  /**
+   * Sets size of this window
+   * @param size - new size, X/Y from top left
+   */
+  setWindowSize(size: [number, number]): void;
 }

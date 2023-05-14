@@ -1,25 +1,34 @@
 import { IWindow } from "../IWindow";
 import { IWindowView } from "../IWindowView";
-import { MouseDragTracker } from "./MouseDragTracker";
+import { IDragListener } from "../drag/IDragListener";
+import { MouseDragTrackerImpl } from "../drag/MouseDragTrackerImpl";
+import { WindowPositionListener } from "./WindowPositionListener";
+import { WindowResizeListener } from "./WindowResizeListener";
 
 export class TileWindow implements IWindow {
 
   private windowElem: HTMLDivElement;
   private header: HTMLDivElement;
+  private resizeHandle: HTMLDivElement;
   private subwindowElem: HTMLDivElement;
 
   private windowPosition: [number, number] = [0, 0];
+  private windowSize: [number, number] = [0, 0];
 
   private windowView: IWindowView;
 
-  private dragTracker: MouseDragTracker;
+  private dragTracker: MouseDragTrackerImpl;
+  private resizeTracker: MouseDragTrackerImpl;
 
   constructor(view: IWindowView) {
     this.windowView = view;
     this.createWindowElements();
-    this.dragTracker = new MouseDragTracker(this.header, this);
+    this.dragTracker = new MouseDragTrackerImpl(this.header, new WindowPositionListener(this));
+    this.resizeTracker = new MouseDragTrackerImpl(this.resizeHandle, new WindowResizeListener(this));
 
     this.subwindowElem.appendChild(view.getRootElement());
+
+    this.windowSize = [this.windowElem.clientWidth, this.windowElem.clientHeight];
   }
 
   getWindowPosition(): [number, number] {
@@ -30,13 +39,19 @@ export class TileWindow implements IWindow {
     this.windowPosition[0] = pos[0];
     this.windowPosition[1] = pos[1];
 
-    console.log(pos);
-    console.log(this.windowPosition);
-
     // might be bad but whatever :3
     console.log("moving: " + pos);
     this.windowElem.style.left = pos[0] + "px";
     this.windowElem.style.top = pos[1] + "px";
+  }
+
+  getWindowSize(): [number, number] {
+    return [this.windowElem.clientWidth, this.windowElem.clientHeight];
+  }
+
+  setWindowSize(size: [number, number]) {
+    this.windowElem.style.width = size[0] + "px";
+    this.windowElem.style.height = size[1] + "px";
   }
 
   private createWindowElements() {
@@ -61,6 +76,9 @@ export class TileWindow implements IWindow {
     let content = this.getElem("content");
     this.subwindowElem = this.getElem("subwindow");
     content.appendChild(this.subwindowElem);
+
+    this.resizeHandle = this.getElem("resize-corner");
+    content.appendChild(this.resizeHandle);
 
     this.windowElem.appendChild(content);
 

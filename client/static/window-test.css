@@ -1,3 +1,7 @@
+:root {
+  --border-size: 4px;
+}
+
 .window {
   width: 600px;
   height: 450px;
@@ -17,7 +21,7 @@
   font-size: 24px;
   text-align: center;
   vertical-align: middle;
-  border: 2px solid red;
+  border: var(--border-size) solid red;
 
   display: flex;
   flex-direction: row;
@@ -34,22 +38,33 @@
 }
 
 .window-close, .window-max {
-  padding: 4px;
+  padding: var(--border-size);
   aspect-ratio: 1;
   background-color: green;
 }
 
 .content {
-  border: 2px solid red;
+  border: var(--border-size) solid red;
   height: 100%;
   box-sizing: border-box;
   border-top: 0px;
+
+  position: relative;
 }
 
 .subwindow {
   height: 100%;
   width: 100%;
   background-color: blue;
+}
+
+.resize-corner {
+  right: calc(var(--border-size) * -.5);
+  bottom: calc(var(--border-size) * -.5);
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
 }
 
 body {
